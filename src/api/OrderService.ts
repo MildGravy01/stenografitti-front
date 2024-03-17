@@ -13,11 +13,11 @@ class OrderService {
     'Content-Type': 'multipart/form-data'}})
     }
 
-    getOrderStatus(orderId: string){
+    getOrder(orderId: string){
         return instance.get(`/api/v1/order/${orderId}/text`);
     }
 
-    getOrder(orderId: string){
+    getOrderStatus(orderId: string){
         return instance.get(`/api/v1/order/${orderId}`);
     }
 }
