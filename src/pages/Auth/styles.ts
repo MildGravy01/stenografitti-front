@@ -24,7 +24,7 @@ gap: 20px;
 `;
 
 export const WindowHeader = styled.div`
-background-color: #1677ff;
+background-color: #737373;
 border-radius: 10px 10px 0px 0px;
 height: 60px;
 display: flex;

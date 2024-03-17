@@ -1,16 +1,20 @@
 import { authService } from "../../api";
-import { makeObservable, observable} from 'mobx';
+import { makeObservable, observable, action} from 'mobx';
 
 
 export class AuthStore {   
     isAuth = false;
     isAuthInProgress = false;
-    userName: string | null = null;
+    userName?: string  = undefined;
     
     constructor() {
       makeObservable(this, {
         isAuth: observable,
-        isAuthInProgress: observable
+        isAuthInProgress: observable,
+        getToken: action,
+        login: action,
+        refreshToken: action,
+        logout: action
       });
       this.checkAuth();
     }
@@ -44,7 +48,7 @@ export class AuthStore {
       const email = localStorage.getItem("email");
       if(token){
         this.isAuth = true;
-        this.userName = email;
+        this.userName = email ?? undefined;
       }
     }
   

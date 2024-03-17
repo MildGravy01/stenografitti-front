@@ -3,26 +3,16 @@ import { OrderItemBackground } from "./styles";
 import { IOrderItemProps } from "./types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
-import { TOrderStatus } from "src/stores/OrdersStore/types";
+import { OrderStatus } from "../../../components/OrderStatus";
 
-export const OrderItem = ({ name, status, preview }: IOrderItemProps) => {
-    const defineStatusColor = (status: TOrderStatus): TagProps['color'] => {
-        switch(status){
-          case "В работе":
-              return "processing";
-          case "Готов":
-              return "success";
-          case "В очереди":
-              return "orange";
-        }
-      }
+export const OrderItem = ({ name, status, preview, onClick }: IOrderItemProps) => {
   return (
-    <OrderItemBackground>
+    <OrderItemBackground onClick={onClick}>
       <div className="outerHolder">
         <div className="innerHolder">
           <h3>{name}</h3>
           <p>{preview}</p>
-          <Tag color={defineStatusColor(status)} className="statusTag">{status}</Tag>
+         <OrderStatus status={status}/>
         </div>
         <Button type="text">
          <FontAwesomeIcon icon={faArrowRight} />

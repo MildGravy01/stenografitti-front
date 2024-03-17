@@ -1,18 +1,29 @@
+import { error } from "console";
 import { orderService } from "../../api";
 import { RootStore } from "../rootStore";
-import { IOrder } from "./types";
-import { makeObservable, observable} from 'mobx';
+import { IOrder, IOrderPreview } from "./types";
+import { makeObservable, observable, action} from 'mobx';
+import { message } from "antd";
 
 export class OrdersStore {
     rootStore: RootStore;
-    ordersList: IOrder[]| null = null;
-
+    ordersList: IOrderPreview[]| null = null;
+    currentOrder: IOrder | null = null;
+    isUploading = false;
     constructor (rootStore: RootStore){
         this.rootStore = rootStore;
         makeObservable(this, {
-            ordersList: observable
+            ordersList: observable,
+            currentOrder: observable,
+            isUploading: observable,
+            getCurrentOrder: action,
+            openOrderPage: action,
+            createOrder: action,
+            getOrderList: action,
         });
-        this.getOrderList();
+    }
+    openOrderPage(orderId:string){
+        location.assign(`/order?order_id=${orderId}`);
     }
 
     async getOrderList(){
@@ -30,15 +41,26 @@ export class OrdersStore {
     }
     async createOrder(name: string,file: File){
         try{
+            this.isUploading = true;
             const resp = await orderService.createOrder(name, file);
             if(!resp){
                 throw new Error("file upload failed");
             }
-            location.assign(`/order?order_id=${resp.data.order}`);
+            console.log("error", resp.data);
+            this.openOrderPage(resp.data?.order);
         }
         catch(err){
-            console.error(err);
+            message.error("Произошла ошибка");
         }
+        finally{
+            this.isUploading = false;
+        }
+    }
+
+    async getCurrentOrder(orderId: string){
+        //this.currentOrder = {id: orderId, name: "Встреча 1", text: undefined, status: "В очереди", preview: "Превью"}
+        const resp = await orderService.getOrder(orderId);
+        this.currentOrder = resp.data;
     }
 
 }

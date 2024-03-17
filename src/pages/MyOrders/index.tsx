@@ -5,16 +5,29 @@ import { observer } from "mobx-react";
 import { useEffect } from "react";
 
 export const MyOrdersPage = observer(() => {
-    const {ordersStore} = useRootStore();
+  const { ordersStore } = useRootStore();
+  useEffect(() => {
+    ordersStore.getOrderList();
+  }, []);
 
-    return (
+  const handleClick = (orderId: string) => {
+    ordersStore.openOrderPage(orderId);
+  };
+  return (
     <PageWrapper>
-        <div className="pageHeader">
-          <h1>Мои заказы</h1>  
-        </div>
-        <ListHolder>
-            {ordersStore.ordersList?.map((item) => <OrderItem {...item}/>)}
-        </ListHolder>
+      <div className="pageHeader">
+        <h1>Мои заказы</h1>
+      </div>
+      <ListHolder>
+        {ordersStore.ordersList?.map((item) => (
+          <OrderItem
+            name={item.name}
+            status={item.status}
+            preview={item.preview}
+            onClick={() => handleClick(item.order_id)}
+          />
+        ))}
+      </ListHolder>
     </PageWrapper>
-    );
+  );
 });

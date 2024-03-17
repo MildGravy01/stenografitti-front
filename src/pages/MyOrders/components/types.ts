@@ -4,4 +4,5 @@ export interface IOrderItemProps {
     name: string;
     preview?: string;
     status: TOrderStatus;
+    onClick: () => void;
 };

@@ -1,10 +1,11 @@
-import { Button, Input, message, Result, Upload, UploadFile, UploadProps } from "antd";
+import { Button, Input, message, Result, Spin, Upload, UploadFile, UploadProps } from "antd";
 import { useRootStore } from "../../contexts/RootStoreContext";
 import { PageWrapper } from "./styles";
 import { useState } from "react";
 import { RcFile } from "antd/es/upload";
+import { observer } from "mobx-react";
 
-export const CreateOrderPage = () => {
+export const CreateOrderPage = observer(() => {
   const { ordersStore } = useRootStore();
   const [fileState, setFile] = useState<RcFile | undefined>(undefined);
   const [nameState, setName] = useState<string| undefined>(undefined);
@@ -23,6 +24,10 @@ export const CreateOrderPage = () => {
   const handleSubmit =() => {
     if(!nameState || !fileState){
         message.error("Вы не заполнили все поля");
+        return;
+    }
+    if(ordersStore.isUploading){
+        message.error("Запрос в процессе выполнения");
         return;
     }
     ordersStore.createOrder(nameState, fileState);
@@ -52,8 +57,8 @@ export const CreateOrderPage = () => {
             <p>Допустимый формат: .mp3, .mp4</p>
           </Dragger>
         )}
-        <Button type="primary" onClick={() => handleSubmit()}>Далее</Button>
+        {ordersStore.isUploading ? <Spin size="large"/> : <Button type="primary" onClick={() => handleSubmit()} disabled={ordersStore.isUploading}>Далее</Button> }
       </div>
     </PageWrapper>
   );
-};
+});

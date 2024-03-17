@@ -1,6 +1,4 @@
-import { IOrder } from "src/stores/OrdersStore/types";
 import { instance } from "./api.config.js";
-import * as fs from 'fs';
 
 class OrderService {
     getItems(token: string) {
@@ -13,6 +11,14 @@ class OrderService {
     return instance.post('/api/v1/file/upload', form, {params: {name}, 
     headers: {
     'Content-Type': 'multipart/form-data'}})
+    }
+
+    getOrderStatus(orderId: string){
+        return instance.get(`/api/v1/order/${orderId}/text`);
+    }
+
+    getOrder(orderId: string){
+        return instance.get(`/api/v1/order/${orderId}`);
     }
 }
 export const orderService = new OrderService();

@@ -1,8 +1,16 @@
-export interface IOrder{
-    id: string;
+export interface IOrderPreview{
+    order_id: string;
     name: string;
-    shortDescription: string;
+    preview: string;
     status: TOrderStatus;
+}
+export interface IOrder extends IOrderPreview{
+    text: string;
+}
+
+export interface ISpeakerText{
+    timestamp: string;
+    text: string;
 }
 
 export type TOrderStatus = 'В очереди' | 'В работе' | 'Готов';

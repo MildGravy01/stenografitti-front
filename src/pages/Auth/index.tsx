@@ -15,7 +15,7 @@ export const AuthPage = () => {
                 </WindowHeader>
                 <InputHolder>
                    <Input placeholder="E-mail" value={authForm.email} onChange={(e) => setAuthForm({...authForm, email: e.target.value})}></Input>
-                   <Input placeholder="Пароль" value={authForm.password} onChange={(e) => setAuthForm({...authForm, password: e.target.value})}></Input>
+                   <Input placeholder="Пароль" type="password" value={authForm.password} onChange={(e) => setAuthForm({...authForm, password: e.target.value})}></Input>
                   <div className="buttonHolder">
                   {/* <Button type="text" className="regButton">
                     Нужна регистрация?

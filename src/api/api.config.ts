@@ -1,6 +1,6 @@
 import axios from 'axios'
 export const instance = axios.create({
-    baseURL: 'http://158.160.86.107:8080',
+    baseURL: 'http://158.160.14.175:8080',
     timeout: 100000,
   });
   

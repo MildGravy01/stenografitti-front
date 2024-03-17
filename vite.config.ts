@@ -5,6 +5,9 @@ import path from 'path';
 export default defineConfig({
   plugins: [react()],
   assetsInclude: ['**/*.png'],
+  optimizeDeps: {
+    exclude: ['date-fns']
+  },
   resolve: {
     alias: {
       'shared': path.resolve(__dirname, './src/shared'),

@@ -5,4 +5,10 @@ display: flex;
 gap: 10px;
 align-items: center;
 color: white;
+&:hover{
+    cursor: pointer;
+}
+.priority{
+    color: gold;
+}
 `;
