@@ -33,7 +33,8 @@ export class MessageStore {
         try{
           this.isMessageInProcess =  true;
           const resp = await messageService.sendMessage(orderId, message);
-          this.currentChat = [...this.currentChat, {text:resp.data, isMine: false, timestamp: Date.now().toString()}];
+          const serverTimeStamp = new Date();
+          this.currentChat = [...this.currentChat, {text:resp.data, isMine: false, timestamp: serverTimeStamp.toISOString()}];
          localStorage.setItem(orderId, JSON.stringify(this.currentChat));
         } catch(e) {
             console.error(e);

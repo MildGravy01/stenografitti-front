@@ -24,6 +24,7 @@ export const MessageHolder = ({chat, handleSendMessage, isBusy}: IMessageHolderP
       ))}
     </StyledBackground>
     <Button onClick={() => handleSendMessage('О чем был текст?')} disabled={isBusy}>О чем был текст?</Button>
+    <Button onClick={() => handleSendMessage('Кто что сказал?')} disabled={isBusy}>Кто что сказал?</Button>
     <Button onClick={() => handleSendMessage('Какие были поручения?')} disabled={isBusy}>Какие были поручения?</Button>
     <Button onClick={() => handleSendMessage('Кто присутствовал на встрече?')} disabled={isBusy}>Кто присутствовал на встрече?</Button>
     </>

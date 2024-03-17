@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { authService } from "../../api";
 import { makeObservable, observable, action} from 'mobx';
 
@@ -60,6 +61,7 @@ export class AuthStore {
         this.isAuth = true;
   
        } catch (err) {
+        message.error("Авторизации нет");
         console.log("login error");
        } finally {
         this.isAuthInProgress = false;
