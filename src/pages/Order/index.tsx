@@ -54,7 +54,7 @@ export const OrderPage = observer(() => {
             )}
           </DocumentHeader>
           {currentOrder?.text ? (
-            <p>{currentOrder?.text}</p>
+            <pre>{currentOrder?.text}</pre>
           ) : (
             <div className="loadingHolder">
               <p>Ваша стенограмма скоро будет готова!</p>

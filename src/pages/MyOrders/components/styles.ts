@@ -24,6 +24,8 @@ export const OrderItemBackground = styled.div`
     padding: 0px 20px;
     p {
         font-family: 'Raleway';
+        font-size: 10px;
+        padding: 10px 20px;
     }
   }
   .statusTag{

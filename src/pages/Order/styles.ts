@@ -5,19 +5,25 @@ width: 100%;
 height: 100%;
 display: flex;
 justify-content: center;
-align-items: center;
-overflow-y: scroll;
 `;
 export const DocumentContainer = styled.div`
 width: 70%;
 display: flex;
 background-color: #F6F6F6;
 min-height: 300px;
+height: max-content;
 flex-direction: column;
 font-family: "Raleway";
 font-size: 15px;
 box-sizing: border-box;
 gap: 10px;
+margin-top: 10px;
+pre{
+    width: 100%;
+    white-space: pre-wrap; 
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
 p{
     margin: 0;
     box-sizing: border-box;
